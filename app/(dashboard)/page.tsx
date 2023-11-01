@@ -20,7 +20,7 @@ export default async function Home() {
     return free;
   };
 
-  const formattedPostamats: PostamatColumn[] = results.map((item: { number: string; status: string; cells: { total: any; free: any; }; structured_address: { city: string; street: string; }; }) => ({
+  const formattedPostamats: PostamatColumn[] = results.map((item: { number: string; status: string; cells: { total: any; free: any; }; structured_address: { city: string; street: string; }; point: {coordinates: number[]} }) => ({
     name: item.number,
     status: item.status === "ОК" ? "ON" : "OFF",
     total: item.cells.total,
@@ -28,7 +28,8 @@ export default async function Home() {
     loaded: freeCells(item),
     city: item.structured_address.city,
     address: item.structured_address.street,
-    sizes: item.cells
+    sizes: item.cells,
+    location: item.point.coordinates
   }));
 
 

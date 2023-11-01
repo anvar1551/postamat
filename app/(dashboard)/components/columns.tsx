@@ -32,6 +32,7 @@ export type PostamatColumn = {
   city: string;
   address: string;
   sizes: string;
+  location: string
 };
 
 export const columns: ColumnDef<PostamatColumn>[] = [
@@ -144,7 +145,9 @@ export const columns: ColumnDef<PostamatColumn>[] = [
                     <li key={key}>
                       <strong>{key}:</strong> {value}
                     </li>
+                    
                   ))}
+                  
                 </ul>
               </PopoverContent>
             </Popover>
@@ -153,32 +156,32 @@ export const columns: ColumnDef<PostamatColumn>[] = [
       );
     },
   },
-  // {
-  //   id: "actions",
-  //   cell: ({ row }) => {
-  //     const postamat = row.original
+  {
+    accessorKey: "location",
+    header: "",
+    id: "actions",
+    cell: ({ row }) => {
+      const {location} = row.original
 
-  //     return (
-  //       <DropdownMenu>
-  //         <DropdownMenuTrigger asChild>
-  //           <Button variant="ghost" className="h-8 w-8 p-0">
-  //             <span className="sr-only">Open menu</span>
-  //             <MoreHorizontal className="h-4 w-4" />
-  //           </Button>
-  //         </DropdownMenuTrigger>
-  //         <DropdownMenuContent align="end">
-  //           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-  //           <DropdownMenuItem
-  //             onClick={() => navigator.clipboard.writeText(postamat.name)}
-  //           >
-  //             Copy payment ID
-  //           </DropdownMenuItem>
-  //           <DropdownMenuSeparator />
-  //           <DropdownMenuItem>View customer</DropdownMenuItem>
-  //           <DropdownMenuItem>View payment details</DropdownMenuItem>
-  //         </DropdownMenuContent>
-  //       </DropdownMenu>
-  //     )
-  //   },
-  // },
+      return (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="h-8 w-8 p-0">
+              <span className="sr-only">Open menu</span>
+              <MoreHorizontal className="h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>Actions</DropdownMenuLabel>
+            <DropdownMenuItem
+              onClick={() => navigator.clipboard.writeText(location)}
+            >
+              Copy coordinates
+            </DropdownMenuItem>
+            {/* <DropdownMenuSeparator /> */}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      )
+    },
+  },
 ];
