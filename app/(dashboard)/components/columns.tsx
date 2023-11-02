@@ -3,6 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import toast, { Toaster } from "react-hot-toast";
 
 import {
   DropdownMenu,
@@ -32,7 +33,7 @@ export type PostamatColumn = {
   city: string;
   address: string;
   sizes: string;
-  location: string
+  location: string;
 };
 
 export const columns: ColumnDef<PostamatColumn>[] = [
@@ -145,9 +146,7 @@ export const columns: ColumnDef<PostamatColumn>[] = [
                     <li key={key}>
                       <strong>{key}:</strong> {value}
                     </li>
-                    
                   ))}
-                  
                 </ul>
               </PopoverContent>
             </Popover>
@@ -161,7 +160,7 @@ export const columns: ColumnDef<PostamatColumn>[] = [
     header: "",
     id: "actions",
     cell: ({ row }) => {
-      const {location} = row.original
+      const { location } = row.original;
 
       return (
         <DropdownMenu>
@@ -174,14 +173,17 @@ export const columns: ColumnDef<PostamatColumn>[] = [
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
             <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(location)}
+              onClick={() => {
+                navigator.clipboard.writeText(location);
+                toast.success("Coordinates copied!");
+              }}
             >
               Copy coordinates
             </DropdownMenuItem>
             {/* <DropdownMenuSeparator /> */}
           </DropdownMenuContent>
         </DropdownMenu>
-      )
+      );
     },
   },
 ];
