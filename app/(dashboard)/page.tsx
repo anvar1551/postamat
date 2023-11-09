@@ -19,12 +19,13 @@
         const { data } = response;
         const { results } = data;
   
-        const formattedPostamats: PostamatColumn[] = results.map((item: { number: string; status: string; cells: { total: any; free: any; }; structured_address: { city: string; street: string; }; point: {coordinates: number[]} }) => ({
+        const formattedPostamats: PostamatColumn[] = results.map((item: { number: string; status: string; cells: { total: any; free: any; }; structured_address: { city: string; street: string; region: string}; point: {coordinates: number[]} }) => ({
           name: item.number,
           status: item.status === "ОК" ? "ON" : "OFF",
           total: item.cells.total,
           free: item.cells.free,
           loaded: freeCells(item),
+          region: item.structured_address.region,
           city: item.structured_address.city,
           address: item.structured_address.street,
           sizes: item.cells,

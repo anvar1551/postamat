@@ -73,7 +73,7 @@ export function DataTable<TData, TValue>({
     <div>
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter postamats..."
+          placeholder="Поиск..."
           value={(table.getColumn(searchKey)?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn(searchKey)?.setFilterValue(event.target.value)
@@ -82,12 +82,13 @@ export function DataTable<TData, TValue>({
         />
         <Select onValueChange={handleSelectChange}>
           <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Search by" />
+            <SelectValue placeholder="Поиск по" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="name">Name</SelectItem>
-            <SelectItem value="city">City</SelectItem>
-            <SelectItem value="address">Address</SelectItem>
+            <SelectItem value="name">номер</SelectItem>
+            <SelectItem value="region">регион</SelectItem>
+            <SelectItem value="city">город</SelectItem>
+            <SelectItem value="address">адрес</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -134,7 +135,7 @@ export function DataTable<TData, TValue>({
                   colSpan={columns.length}
                   className="h-24 text-center"
                 >
-                  No results.
+                  Нет результатов.
                 </TableCell>
               </TableRow>
             )}

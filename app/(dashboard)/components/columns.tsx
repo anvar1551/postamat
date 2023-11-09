@@ -1,7 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import { ArrowUpDown, MoreHorizontal, LayoutDashboard  } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -30,6 +30,7 @@ export type PostamatColumn = {
   total: string;
   free: string;
   loaded: string;
+  region: string,
   city: string;
   address: string;
   sizes: string;
@@ -39,7 +40,7 @@ export type PostamatColumn = {
 export const columns: ColumnDef<PostamatColumn>[] = [
   {
     accessorKey: "name",
-    header: "Name",
+    header: "Номер",
   },
   {
     accessorKey: "status",
@@ -49,7 +50,7 @@ export const columns: ColumnDef<PostamatColumn>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Status
+          Статус
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -69,7 +70,7 @@ export const columns: ColumnDef<PostamatColumn>[] = [
   },
   {
     accessorKey: "total",
-    header: "Total cells",
+    header: "Ячейки",
   },
   {
     accessorKey: "free",
@@ -79,7 +80,7 @@ export const columns: ColumnDef<PostamatColumn>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Free cells
+          Свободно
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -98,7 +99,7 @@ export const columns: ColumnDef<PostamatColumn>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Loaded cells
+          Занято
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -110,6 +111,10 @@ export const columns: ColumnDef<PostamatColumn>[] = [
     },
   },
   {
+    accessorKey: "region",
+    header: "Регион"
+  },
+  {
     accessorKey: "city",
     header: ({ column }) => {
       return (
@@ -117,7 +122,7 @@ export const columns: ColumnDef<PostamatColumn>[] = [
           variant="ghost"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          City
+          Город
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       );
@@ -126,11 +131,11 @@ export const columns: ColumnDef<PostamatColumn>[] = [
 
   {
     accessorKey: "address",
-    header: "Address",
+    header: "Адрес",
   },
   {
     accessorKey: "sizes",
-    header: "Details",
+    header: "Детали",
     cell: ({ row }) => {
       const { sizes } = row.original;
       const size = Object.entries(sizes);
@@ -139,7 +144,7 @@ export const columns: ColumnDef<PostamatColumn>[] = [
         <div className="">
           {
             <Popover>
-              <PopoverTrigger className=" font-bold">Open</PopoverTrigger>
+              <PopoverTrigger className=" font-bold"><LayoutDashboard className="h-6 w-6 ml-2"/></PopoverTrigger>
               <PopoverContent>
                 <ul>
                   {size.map(([key, value]) => (
@@ -175,10 +180,10 @@ export const columns: ColumnDef<PostamatColumn>[] = [
             <DropdownMenuItem
               onClick={() => {
                 navigator.clipboard.writeText(location);
-                toast.success("Coordinates copied!");
+                toast.success("Координата скопирована!");
               }}
             >
-              Copy coordinates
+              Копировать
             </DropdownMenuItem>
             {/* <DropdownMenuSeparator /> */}
           </DropdownMenuContent>
